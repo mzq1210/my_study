@@ -1,0 +1,22 @@
+6:C 26 Sep 11:26:25.480 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+6:C 26 Sep 11:26:25.480 # Redis version=4.0.11, bits=64, commit=00000000, modified=0, pid=6, just started
+6:C 26 Sep 11:26:25.480 # Configuration loaded
+6:M 26 Sep 11:26:25.482 * Running mode=standalone, port=6379.
+6:M 26 Sep 11:26:25.482 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+6:M 26 Sep 11:26:25.482 # Server initialized
+6:M 26 Sep 11:26:25.482 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+6:M 26 Sep 11:26:25.482 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+6:M 26 Sep 11:26:25.482 * Ready to accept connections
+6:S 26 Sep 11:30:29.081 * Before turning into a slave, using my master parameters to synthesize a cached master: I may be able to synchronize with the new master with just a partial transfer.
+6:S 26 Sep 11:30:29.081 * SLAVE OF 101.200.56.53:6388 enabled (user request from 'id=3 addr=127.0.0.1:52198 fd=7 name= age=13 idle=0 flags=N db=0 sub=0 psub=0 multi=-1 qbuf=0 qbuf-free=32768 obl=0 oll=0 omem=0 events=r cmd=slaveof')
+6:S 26 Sep 11:30:29.944 * Connecting to MASTER 101.200.56.53:6388
+6:S 26 Sep 11:30:29.944 * MASTER <-> SLAVE sync started
+6:S 26 Sep 11:30:29.947 * Non blocking connect for SYNC fired the event.
+6:S 26 Sep 11:30:29.949 * Master replied to PING, replication can continue...
+6:S 26 Sep 11:30:29.959 * Trying a partial resynchronization (request 8bdda26bb2cf233f561bded57fd2007029581f6a:1).
+6:S 26 Sep 11:30:29.962 * Full resync from master: 55f68a442ba5f53533eda2ec3197cbfaee064b67:34087
+6:S 26 Sep 11:30:29.962 * Discarding previously cached master state.
+6:S 26 Sep 11:30:30.053 * MASTER <-> SLAVE sync: receiving 179 bytes from master
+6:S 26 Sep 11:30:30.053 * MASTER <-> SLAVE sync: Flushing old data
+6:S 26 Sep 11:30:30.053 * MASTER <-> SLAVE sync: Loading DB in memory
+6:S 26 Sep 11:30:30.054 * MASTER <-> SLAVE sync: Finished with success

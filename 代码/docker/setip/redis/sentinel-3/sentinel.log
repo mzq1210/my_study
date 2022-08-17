@@ -1,0 +1,13 @@
+6:X 26 Sep 11:26:25.534 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+6:X 26 Sep 11:26:25.534 # Redis version=4.0.11, bits=64, commit=00000000, modified=0, pid=6, just started
+6:X 26 Sep 11:26:25.534 # Configuration loaded
+6:X 26 Sep 11:26:25.535 * Running mode=sentinel, port=26379.
+6:X 26 Sep 11:26:25.535 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+6:X 26 Sep 11:26:25.546 # Sentinel ID is e23404a579ac388bf7910a7e64bd5f491b46bc96
+6:X 26 Sep 11:26:25.546 # +monitor master mymaster 101.200.56.53 6388 quorum 2
+6:X 26 Sep 11:26:27.537 * +sentinel sentinel 15cc6a486212920955158bcb6595ebca8bc5f06e 101.200.56.53 26386 @ mymaster 101.200.56.53 6388
+6:X 26 Sep 11:26:27.602 * +sentinel sentinel 1e21ed68cd61c3f07f51b706694ff352b90a77ef 101.200.56.53 26387 @ mymaster 101.200.56.53 6388
+6:X 26 Sep 11:26:57.611 # +sdown sentinel 1e21ed68cd61c3f07f51b706694ff352b90a77ef 101.200.56.53 26387 @ mymaster 101.200.56.53 6388
+6:X 26 Sep 11:27:55.939 * +slave slave 101.200.56.53:6390 101.200.56.53 6390 @ mymaster 101.200.56.53 6388
+6:X 26 Sep 11:28:26.008 # +sdown slave 101.200.56.53:6390 101.200.56.53 6390 @ mymaster 101.200.56.53 6388
+6:X 26 Sep 11:30:36.560 * +slave slave 101.200.56.53:6389 101.200.56.53 6389 @ mymaster 101.200.56.53 6388

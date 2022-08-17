@@ -1,0 +1,67 @@
+1:X 24 Sep 2019 06:44:38.095 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:X 24 Sep 2019 06:44:38.096 # Redis version=5.0.5, bits=64, commit=00000000, modified=0, pid=1, just started
+1:X 24 Sep 2019 06:44:38.096 # Configuration loaded
+1:X 24 Sep 2019 06:44:38.097 * Running mode=sentinel, port=26379.
+1:X 24 Sep 2019 06:44:38.097 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:X 24 Sep 2019 06:44:38.104 # Sentinel ID is 62cf119f0a7d96b18a9dcbc862f9931ac942a807
+1:X 24 Sep 2019 06:44:38.104 # +monitor master mymaster 192.168.1.11 6379 quorum 2
+1:X 24 Sep 2019 06:57:11.084 * +slave slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:00:11.925 * +fix-slave-config slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:00:32.037 * +slave slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:03:32.737 * +fix-slave-config slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.11 6379
+1:signal-handler (1569309545) Received SIGTERM scheduling shutdown...
+1:X 24 Sep 2019 07:19:05.618 # User requested shutdown...
+1:X 24 Sep 2019 07:19:05.618 # Sentinel is now ready to exit, bye bye...
+1:X 24 Sep 2019 07:19:28.021 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:X 24 Sep 2019 07:19:28.021 # Redis version=5.0.5, bits=64, commit=00000000, modified=0, pid=1, just started
+1:X 24 Sep 2019 07:19:28.022 # Configuration loaded
+1:X 24 Sep 2019 07:19:28.023 * Running mode=sentinel, port=26379.
+1:X 24 Sep 2019 07:19:28.023 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:X 24 Sep 2019 07:19:28.031 # Sentinel ID is 0b2cc098288cd237f4558832b07f740498b592a6
+1:X 24 Sep 2019 07:19:28.031 # +monitor master mymaster 192.168.1.11 6379 quorum 2
+1:X 24 Sep 2019 07:19:31.086 * +sentinel sentinel 980389778fd200900672086d6aa66047c0ff7105 192.168.1.16 26379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:19:31.163 * +sentinel sentinel 00135a7832e3f9815a056923d5b97ea31627d2f3 192.168.1.15 26379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:20:28.264 * +slave slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:21:58.730 * +slave slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:23:29.035 * +fix-slave-config slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:24:59.572 * +fix-slave-config slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.264 # +sdown master mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.277 # +new-epoch 1
+1:X 24 Sep 2019 08:35:28.279 # +vote-for-leader 00135a7832e3f9815a056923d5b97ea31627d2f3 1
+1:X 24 Sep 2019 08:35:28.340 # +odown master mymaster 192.168.1.11 6379 #quorum 3/2
+1:X 24 Sep 2019 08:35:28.340 # Next failover delay: I will not start a failover before Tue Sep 24 08:41:28 2019
+1:X 24 Sep 2019 08:35:28.794 # +config-update-from sentinel 00135a7832e3f9815a056923d5b97ea31627d2f3 192.168.1.15 26379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.794 # +switch-master mymaster 192.168.1.11 6379 192.168.1.12 6379
+1:X 24 Sep 2019 08:35:28.795 * +slave slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.12 6379
+1:X 24 Sep 2019 08:35:28.795 * +slave slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:X 24 Sep 2019 08:35:58.809 # +sdown slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:X 24 Sep 2019 08:40:33.946 # -sdown slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:signal-handler (1569475800) Received SIGTERM scheduling shutdown...
+1:X 26 Sep 2019 05:30:00.308 # User requested shutdown...
+1:X 26 Sep 2019 05:30:00.308 # Sentinel is now ready to exit, bye bye...
+1:X 26 Sep 2019 05:52:00.906 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:X 26 Sep 2019 05:52:00.906 # Redis version=5.0.5, bits=64, commit=00000000, modified=0, pid=1, just started
+1:X 26 Sep 2019 05:52:00.906 # Configuration loaded
+1:X 26 Sep 2019 05:52:00.908 * Running mode=sentinel, port=26379.
+1:X 26 Sep 2019 05:52:00.908 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:X 26 Sep 2019 05:52:00.908 # Sentinel ID is 0b2cc098288cd237f4558832b07f740498b592a6
+1:X 26 Sep 2019 05:52:00.908 # +monitor master mymaster 192.168.1.12 6379 quorum 2
+1:X 26 Sep 2019 05:54:38.425 # +new-epoch 2
+1:X 26 Sep 2019 05:54:38.427 # +vote-for-leader 00135a7832e3f9815a056923d5b97ea31627d2f3 2
+1:X 26 Sep 2019 05:54:39.321 # +config-update-from sentinel 00135a7832e3f9815a056923d5b97ea31627d2f3 192.168.1.15 26379 @ mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:39.321 # +switch-master mymaster 192.168.1.12 6379 192.168.1.13 6379
+1:X 26 Sep 2019 05:54:39.321 * +slave slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.13 6379
+1:X 26 Sep 2019 05:54:39.321 * +slave slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.13 6379
+1:signal-handler (1569477452) Received SIGTERM scheduling shutdown...
+1:X 26 Sep 2019 05:57:32.127 # User requested shutdown...
+1:X 26 Sep 2019 05:57:32.127 # Sentinel is now ready to exit, bye bye...
+1:X 26 Sep 2019 05:57:57.225 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:X 26 Sep 2019 05:57:57.234 # Redis version=5.0.5, bits=64, commit=00000000, modified=0, pid=1, just started
+1:X 26 Sep 2019 05:57:57.234 # Configuration loaded
+1:X 26 Sep 2019 05:57:57.236 * Running mode=sentinel, port=26379.
+1:X 26 Sep 2019 05:57:57.236 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:X 26 Sep 2019 05:57:57.236 # Sentinel ID is 0b2cc098288cd237f4558832b07f740498b592a6
+1:X 26 Sep 2019 05:57:57.236 # +monitor master mymaster 192.168.1.13 6379 quorum 2
+1:signal-handler (1569477499) Received SIGTERM scheduling shutdown...
+1:X 26 Sep 2019 05:58:19.223 # User requested shutdown...
+1:X 26 Sep 2019 05:58:19.223 # Sentinel is now ready to exit, bye bye...

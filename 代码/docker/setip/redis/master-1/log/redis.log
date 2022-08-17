@@ -1,0 +1,27 @@
+6:C 26 Sep 11:26:22.646 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+6:C 26 Sep 11:26:22.646 # Redis version=4.0.11, bits=64, commit=00000000, modified=0, pid=6, just started
+6:C 26 Sep 11:26:22.646 # Configuration loaded
+6:M 26 Sep 11:26:22.647 * Running mode=standalone, port=6379.
+6:M 26 Sep 11:26:22.647 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+6:M 26 Sep 11:26:22.647 # Server initialized
+6:M 26 Sep 11:26:22.647 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+6:M 26 Sep 11:26:22.648 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+6:M 26 Sep 11:26:22.648 * Ready to accept connections
+6:M 26 Sep 11:27:46.735 * Slave 101.200.56.53:6390 asks for synchronization
+6:M 26 Sep 11:27:46.735 * Partial resynchronization not accepted: Replication ID mismatch (Slave asked for 'a21fe60e1541a2eef11873f1dd867aa207d7948a', my replication IDs are '136a47e45788282c27836ef44c727018d0141300' and '0000000000000000000000000000000000000000')
+6:M 26 Sep 11:27:46.736 * Starting BGSAVE for SYNC with target: disk
+6:M 26 Sep 11:27:46.736 * Background saving started by pid 10
+10:C 26 Sep 11:27:46.740 * DB saved on disk
+10:C 26 Sep 11:27:46.740 * RDB: 4 MB of memory used by copy-on-write
+6:M 26 Sep 11:27:46.770 * Background saving terminated with success
+6:M 26 Sep 11:27:46.770 * Synchronization with slave 101.200.56.53:6390 succeeded
+6:M 26 Sep 11:30:29.960 * Slave 101.200.56.53:6389 asks for synchronization
+6:M 26 Sep 11:30:29.960 * Partial resynchronization not accepted: Replication ID mismatch (Slave asked for '8bdda26bb2cf233f561bded57fd2007029581f6a', my replication IDs are '55f68a442ba5f53533eda2ec3197cbfaee064b67' and '0000000000000000000000000000000000000000')
+6:M 26 Sep 11:30:29.960 * Starting BGSAVE for SYNC with target: disk
+6:M 26 Sep 11:30:29.961 * Background saving started by pid 18
+18:C 26 Sep 11:30:29.966 * DB saved on disk
+18:C 26 Sep 11:30:29.967 * RDB: 4 MB of memory used by copy-on-write
+6:M 26 Sep 11:30:30.052 * Background saving terminated with success
+6:M 26 Sep 11:30:30.053 * Synchronization with slave 101.200.56.53:6389 succeeded
+6:M 09 Oct 09:01:26.893 # Connection with slave 101.200.56.53:6389 lost.
+6:M 09 Oct 09:01:26.897 # Connection with slave 101.200.56.53:6390 lost.

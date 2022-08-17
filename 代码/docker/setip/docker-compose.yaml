@@ -1,0 +1,133 @@
+#能够编排管理3个容器,php,redis,nginx
+version: "3.6"
+services: #服务
+  master-1:
+    image: redis
+    container_name: master-1
+    environment:
+      - REALIP=101.200.56.53
+      - PORT=6388
+    networks:
+       redis-network:
+         ipv4_address: 192.168.1.11   #设置ip地址
+    working_dir: /usr/src/redis #工作目录
+    stdin_open: true
+    tty: true
+    ports:
+        - "6388:6379"
+    volumes:
+      - /usr/docker/setip/redis/master-1:/usr/src/redis
+    entrypoint:
+      - /bin/sh
+      - /usr/src/sh/redis.sh
+  slave-1:
+      image: redis
+      container_name: slave-1
+      environment:
+        - REALIP=101.200.56.53
+        - PORT=6389
+      links:
+        - master-1
+      networks:
+         redis-network:
+           ipv4_address: 192.168.1.12   #设置ip地址
+      working_dir: /usr/src/redis #工作目录
+      stdin_open: true
+      tty: true
+      ports:
+          - "6389:6379"
+      volumes:
+        - /usr/docker/setip/redis/slave-1:/usr/src/redis
+      entrypoint:
+        - /bin/sh
+        - /usr/src/sh/redis.sh
+  slave-2:
+      image: redis
+      container_name: slave-2
+      environment:
+        - REALIP=101.200.56.53
+        - PORT=6390
+      links:
+        - master-1
+      networks:
+         redis-network:
+           ipv4_address: 192.168.1.13   #设置ip地址
+      working_dir: /usr/src/redis #工作目录
+      stdin_open: true
+      tty: true
+      ports:
+          - "6390:6379"
+      volumes:
+        - /usr/docker/setip/redis/slave-2:/usr/src/redis
+      entrypoint:
+        - /bin/sh
+        - /usr/src/sh/redis.sh
+  sentinel-1:
+      image: redis
+      container_name: sentinel-1
+      environment:
+        - REALIP=101.200.56.53
+        - PORT=26386
+      links:
+        - master-1
+      networks:
+         redis-network:
+           ipv4_address: 192.168.1.14   #设置ip地址
+      working_dir: /usr/src/redis #工作目录
+      stdin_open: true
+      tty: true
+      ports:
+          - "26386:26379"
+      volumes:
+        - /usr/docker/setip/redis/sentinel-1:/usr/src/redis
+      entrypoint:
+        - /bin/sh
+        - /usr/src/sh/sentinel.sh
+  sentinel-2:
+      image: redis
+      container_name: sentinel-2
+      environment:
+        - REALIP=101.200.56.53
+        - PORT=26387
+      links:
+        - master-1
+      networks:
+         redis-network:
+           ipv4_address: 192.168.1.15   #设置ip地址
+      working_dir: /usr/src/redis #工作目录
+      stdin_open: true
+      tty: true
+      ports:
+          - "26387:26379"
+      volumes:
+        - /usr/docker/setip/redis/sentinel-2:/usr/src/redis
+      entrypoint:
+        - /bin/sh
+        - /usr/src/sh/sentinel.sh
+  sentinel-3:
+      image: redis
+      container_name: sentinel-3
+      environment:
+        - REALIP=101.200.56.53
+        - PORT=26388
+      links:
+        - master-1
+      networks:
+         redis-network:
+           ipv4_address: 192.168.1.16   #设置ip地址
+      working_dir: /usr/src/redis #工作目录
+      stdin_open: true
+      tty: true
+      ports:
+          - "26388:26379"
+      volumes:
+        - /usr/docker/setip/redis/sentinel-3:/usr/src/redis
+      entrypoint:
+        - /bin/sh
+        - /usr/src/sh/sentinel.sh
+#设置网络环境
+networks:
+  #引用外部预先定义好的网段
+  redis-network:
+   external:
+      name: redis-network

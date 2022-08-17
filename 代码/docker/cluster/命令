@@ -1,0 +1,30 @@
+#cluster meet提示ok，但是握手不成功原因是+10000的端口16391需要阿里云开放端口
+
+#设置主从
+redis-cli -a sixstar -h 101.200.56.53  -p 6395  cluster replicate c848bcafde36c74e1e8c43cf5b2081d4b1730d19
+
+#分配虚拟槽
+redis-cli -h 101.200.56.53  -p 6391 -a sixstar cluster addslots {0..5461}
+
+redis-cli -h 101.200.56.53 -p 6392  -a sixstar cluster addslots {5462..10922}
+
+redis-cli -h 101.200.56.53 -p 6393  -a sixstar cluster addslots {10923..16383}
+
+
+#脚本分配主从和虚拟槽（1个从节点，前三为主，后三为从）
+./redis-trib.rb create --replicas 1 101.200.56.53:6391 101.200.56.53:6392 101.200.56.53:6393 101.200.56.53:6394 101.200.56.53:6395 101.200.56.53:6396
+
+#脚本新增节点
+./redis-trib.rb add-node 101.200.56.53:6397 101.200.56.53:6391
+./redis-trib.rb add-node 101.200.56.53:6398 101.200.56.53:6391
+
+#脚本删除节点
+./redis-trib.rb del-node 101.200.56.53:6390  cd7a5fac0dd8a0d90565342506914b5ad2bd5818
+
+#脚本数据槽迁移（扩容）
+./redis-trib.rb reshard 101.200.56.53:6391   #老节点
+新节点ID
+all
+yes
+
+#脚本数据槽迁移（缩容）

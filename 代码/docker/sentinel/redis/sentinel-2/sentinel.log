@@ -1,0 +1,95 @@
+1:X 24 Sep 2019 06:44:39.008 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:X 24 Sep 2019 06:44:39.008 # Redis version=5.0.5, bits=64, commit=00000000, modified=0, pid=1, just started
+1:X 24 Sep 2019 06:44:39.008 # Configuration loaded
+1:X 24 Sep 2019 06:44:39.009 * Running mode=sentinel, port=26379.
+1:X 24 Sep 2019 06:44:39.009 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:X 24 Sep 2019 06:44:39.016 # Sentinel ID is b2d268f6bc8e9ff369acd8645ce473e4d520f5b5
+1:X 24 Sep 2019 06:44:39.016 # +monitor master mymaster 127.0.0.1 6379 quorum 2
+1:X 24 Sep 2019 06:45:09.028 # +sdown master mymaster 127.0.0.1 6379
+1:signal-handler (1569309545) Received SIGTERM scheduling shutdown...
+1:X 24 Sep 2019 07:19:05.699 # User requested shutdown...
+1:X 24 Sep 2019 07:19:05.699 # Sentinel is now ready to exit, bye bye...
+1:X 24 Sep 2019 07:19:29.149 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:X 24 Sep 2019 07:19:29.149 # Redis version=5.0.5, bits=64, commit=00000000, modified=0, pid=1, just started
+1:X 24 Sep 2019 07:19:29.150 # Configuration loaded
+1:X 24 Sep 2019 07:19:29.151 * Running mode=sentinel, port=26379.
+1:X 24 Sep 2019 07:19:29.151 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:X 24 Sep 2019 07:19:29.166 # Sentinel ID is 00135a7832e3f9815a056923d5b97ea31627d2f3
+1:X 24 Sep 2019 07:19:29.166 # +monitor master mymaster 192.168.1.11 6379 quorum 2
+1:X 24 Sep 2019 07:19:30.066 * +sentinel sentinel 0b2cc098288cd237f4558832b07f740498b592a6 192.168.1.14 26379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:19:31.086 * +sentinel sentinel 980389778fd200900672086d6aa66047c0ff7105 192.168.1.16 26379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:20:29.347 * +slave slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 07:21:59.716 * +slave slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.205 # +sdown master mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.271 # +odown master mymaster 192.168.1.11 6379 #quorum 2/2
+1:X 24 Sep 2019 08:35:28.271 # +new-epoch 1
+1:X 24 Sep 2019 08:35:28.271 # +try-failover master mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.274 # +vote-for-leader 00135a7832e3f9815a056923d5b97ea31627d2f3 1
+1:X 24 Sep 2019 08:35:28.278 # 980389778fd200900672086d6aa66047c0ff7105 voted for 00135a7832e3f9815a056923d5b97ea31627d2f3 1
+1:X 24 Sep 2019 08:35:28.279 # 0b2cc098288cd237f4558832b07f740498b592a6 voted for 00135a7832e3f9815a056923d5b97ea31627d2f3 1
+1:X 24 Sep 2019 08:35:28.340 # +elected-leader master mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.340 # +failover-state-select-slave master mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.395 # +selected-slave slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.395 * +failover-state-send-slaveof-noone slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.462 * +failover-state-wait-promotion slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.738 # +promoted-slave slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.738 # +failover-state-reconf-slaves master mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:28.793 * +slave-reconf-sent slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:29.389 # -odown master mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:29.795 * +slave-reconf-inprog slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:29.795 * +slave-reconf-done slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:29.860 # +failover-end master mymaster 192.168.1.11 6379
+1:X 24 Sep 2019 08:35:29.860 # +switch-master mymaster 192.168.1.11 6379 192.168.1.12 6379
+1:X 24 Sep 2019 08:35:29.860 * +slave slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.12 6379
+1:X 24 Sep 2019 08:35:29.860 * +slave slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:X 24 Sep 2019 08:35:59.870 # +sdown slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:X 24 Sep 2019 08:40:33.371 # -sdown slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:X 24 Sep 2019 08:40:43.320 * +convert-to-slave slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:signal-handler (1569475800) Received SIGTERM scheduling shutdown...
+1:X 26 Sep 2019 05:30:00.240 # User requested shutdown...
+1:X 26 Sep 2019 05:30:00.241 # Sentinel is now ready to exit, bye bye...
+1:X 26 Sep 2019 05:51:46.814 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:X 26 Sep 2019 05:51:46.814 # Redis version=5.0.5, bits=64, commit=00000000, modified=0, pid=1, just started
+1:X 26 Sep 2019 05:51:46.814 # Configuration loaded
+1:X 26 Sep 2019 05:51:46.815 * Running mode=sentinel, port=26379.
+1:X 26 Sep 2019 05:51:46.815 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:X 26 Sep 2019 05:51:46.815 # Sentinel ID is 00135a7832e3f9815a056923d5b97ea31627d2f3
+1:X 26 Sep 2019 05:51:46.815 # +monitor master mymaster 192.168.1.12 6379 quorum 2
+1:X 26 Sep 2019 05:51:56.826 * +convert-to-slave slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:38.357 # +sdown master mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:38.419 # +odown master mymaster 192.168.1.12 6379 #quorum 2/2
+1:X 26 Sep 2019 05:54:38.419 # +new-epoch 2
+1:X 26 Sep 2019 05:54:38.419 # +try-failover master mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:38.421 # +vote-for-leader 00135a7832e3f9815a056923d5b97ea31627d2f3 2
+1:X 26 Sep 2019 05:54:38.427 # 980389778fd200900672086d6aa66047c0ff7105 voted for 00135a7832e3f9815a056923d5b97ea31627d2f3 2
+1:X 26 Sep 2019 05:54:38.427 # 0b2cc098288cd237f4558832b07f740498b592a6 voted for 00135a7832e3f9815a056923d5b97ea31627d2f3 2
+1:X 26 Sep 2019 05:54:38.479 # +elected-leader master mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:38.479 # +failover-state-select-slave master mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:38.531 # +selected-slave slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:38.531 * +failover-state-send-slaveof-noone slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:38.621 * +failover-state-wait-promotion slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:39.271 # +promoted-slave slave 192.168.1.13:6379 192.168.1.13 6379 @ mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:39.271 # +failover-state-reconf-slaves master mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:39.319 * +slave-reconf-sent slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:39.518 # -odown master mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:40.128 * +slave-reconf-inprog slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:40.128 * +slave-reconf-done slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:40.204 # +failover-end master mymaster 192.168.1.12 6379
+1:X 26 Sep 2019 05:54:40.204 # +switch-master mymaster 192.168.1.12 6379 192.168.1.13 6379
+1:X 26 Sep 2019 05:54:40.204 * +slave slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.13 6379
+1:X 26 Sep 2019 05:54:40.204 * +slave slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.13 6379
+1:signal-handler (1569477452) Received SIGTERM scheduling shutdown...
+1:X 26 Sep 2019 05:57:32.028 # User requested shutdown...
+1:X 26 Sep 2019 05:57:32.028 # Sentinel is now ready to exit, bye bye...
+1:X 26 Sep 2019 05:57:57.178 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:X 26 Sep 2019 05:57:57.178 # Redis version=5.0.5, bits=64, commit=00000000, modified=0, pid=1, just started
+1:X 26 Sep 2019 05:57:57.178 # Configuration loaded
+1:X 26 Sep 2019 05:57:57.179 * Running mode=sentinel, port=26379.
+1:X 26 Sep 2019 05:57:57.179 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:X 26 Sep 2019 05:57:57.179 # Sentinel ID is 00135a7832e3f9815a056923d5b97ea31627d2f3
+1:X 26 Sep 2019 05:57:57.179 # +monitor master mymaster 192.168.1.13 6379 quorum 2
+1:X 26 Sep 2019 05:58:07.186 * +convert-to-slave slave 192.168.1.12:6379 192.168.1.12 6379 @ mymaster 192.168.1.13 6379
+1:X 26 Sep 2019 05:58:07.186 * +convert-to-slave slave 192.168.1.11:6379 192.168.1.11 6379 @ mymaster 192.168.1.13 6379
+1:signal-handler (1569477499) Received SIGTERM scheduling shutdown...
+1:X 26 Sep 2019 05:58:19.225 # User requested shutdown...
+1:X 26 Sep 2019 05:58:19.225 # Sentinel is now ready to exit, bye bye...
