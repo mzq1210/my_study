@@ -14,7 +14,6 @@ services: #服务
         - "6388:6379"
     volumes:
       - /home/sentinel/redis/master-1:/usr/src/redis
-    command: ["/usr/local/bin/redis-server","/usr/src/redis/conf/redis.conf"]
   slave-1:
       image: redis
       container_name: slave-1
@@ -30,7 +29,6 @@ services: #服务
           - "6389:6379"
       volumes:
         - /home/sentinel/redis/slave-1:/usr/src/redis
-      command: ["/usr/local/bin/redis-server","/usr/src/redis/conf/redis.conf"]
   slave-2:
       image: redis
       container_name: slave-2
@@ -46,7 +44,6 @@ services: #服务
           - "6390:6379"
       volumes:
         - /home/sentinel/redis/slave-2:/usr/src/redis
-      command: ["/usr/local/bin/redis-server","/usr/src/redis/conf/redis.conf"]
   sentinel-1:
       image: redis
       container_name: sentinel-1
