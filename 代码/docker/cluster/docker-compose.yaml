@@ -4,7 +4,7 @@ services: #服务
     image: redis-cluster
     container_name: cluster-1
     environment:
-      - REALIP=101.200.56.53
+      - REALIP=192.168.233.11
       - PORT=6391
       - PORT2=16391
     networks:
@@ -17,7 +17,7 @@ services: #服务
         - "6391:6379"
         - "16391:16379"
     volumes:
-      - /usr/docker/cluster/redis/master-1:/usr/src/redis
+      - /home/cluster/redis/master-1:/usr/src/redis
     entrypoint:
        - /bin/bash
        - /usr/src/sh/cluster.sh
@@ -25,7 +25,7 @@ services: #服务
       image: redis-cluster
       container_name: cluster-2
       environment:
-        - REALIP=101.200.56.53
+        - REALIP=192.168.233.11
         - PORT=6392
         - PORT2=16392
       networks:
@@ -38,7 +38,7 @@ services: #服务
           - "6392:6379"
           - "16392:16379"
       volumes:
-        - /usr/docker/cluster/redis/master-2:/usr/src/redis
+        - /home/cluster/redis/master-2:/usr/src/redis
       entrypoint:
          - /bin/bash
          - /usr/src/sh/cluster.sh
@@ -46,7 +46,7 @@ services: #服务
       image: redis-cluster
       container_name: cluster-3
       environment:
-        - REALIP=101.200.56.53
+        - REALIP=192.168.233.11
         - PORT=6393
         - PORT2=16393
       networks:
@@ -59,7 +59,7 @@ services: #服务
           - "6393:6379"
           - "16393:16379"
       volumes:
-        - /usr/docker/cluster/redis/master-3:/usr/src/redis
+        - /home/cluster/redis/master-3:/usr/src/redis
       entrypoint:
          - /bin/bash
          - /usr/src/sh/cluster.sh
@@ -67,7 +67,7 @@ services: #服务
         image: redis-cluster
         container_name: cluster-4
         environment:
-          - REALIP=101.200.56.53
+          - REALIP=192.168.233.11
           - PORT=6394
           - PORT2=16394
         networks:
@@ -80,7 +80,7 @@ services: #服务
             - "6394:6379"
             - "16394:16379"
         volumes:
-          - /usr/docker/cluster/redis/master-4:/usr/src/redis
+          - /home/cluster/redis/master-4:/usr/src/redis
         entrypoint:
            - /bin/bash
            - /usr/src/sh/cluster.sh
@@ -88,7 +88,7 @@ services: #服务
         image: redis-cluster
         container_name: cluster-5
         environment:
-          - REALIP=101.200.56.53
+          - REALIP=192.168.233.11
           - PORT=6395
           - PORT2=16395
         networks:
@@ -101,7 +101,7 @@ services: #服务
             - "6395:6379"
             - "16395:16379"
         volumes:
-          - /usr/docker/cluster/redis/slave-1:/usr/src/redis
+          - /home/cluster/redis/slave-1:/usr/src/redis
         entrypoint:
            - /bin/bash
            - /usr/src/sh/cluster.sh
@@ -109,7 +109,7 @@ services: #服务
         image: redis-cluster
         container_name: cluster-6
         environment:
-          - REALIP=101.200.56.53
+          - REALIP=192.168.233.11
           - PORT=6396
           - PORT2=16396
         networks:
@@ -122,7 +122,7 @@ services: #服务
             - "6396:6379"
             - "16396:16379"
         volumes:
-          - /usr/docker/cluster/redis/slave-2:/usr/src/redis
+          - /home/cluster/redis/slave-2:/usr/src/redis
         entrypoint:
            - /bin/bash
            - /usr/src/sh/cluster.sh
@@ -130,7 +130,7 @@ services: #服务
       image: redis-cluster
       container_name: cluster-7
       environment:
-        - REALIP=101.200.56.53
+        - REALIP=192.168.233.11
         - PORT=6397
         - PORT2=16397
       networks:
@@ -143,7 +143,7 @@ services: #服务
           - "6397:6379"
           - "16397:16379"
       volumes:
-        - /usr/docker/cluster/redis/slave-3:/usr/src/redis
+        - /home/cluster/redis/slave-3:/usr/src/redis
       entrypoint:
          - /bin/bash
          - /usr/src/sh/cluster.sh
@@ -151,7 +151,7 @@ services: #服务
         image: redis-cluster
         container_name: cluster-8
         environment:
-          - REALIP=101.200.56.53
+          - REALIP=192.168.233.11
           - PORT=6398
           - PORT2=16398
         networks:
@@ -164,7 +164,7 @@ services: #服务
             - "6398:6379"
             - "16398:16379"
         volumes:
-          - /usr/docker/cluster/redis/slave-4:/usr/src/redis
+          - /home/cluster/redis/slave-4:/usr/src/redis
         entrypoint:
            - /bin/bash
            - /usr/src/sh/cluster.sh
