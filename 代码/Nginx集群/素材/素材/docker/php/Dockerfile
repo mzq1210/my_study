@@ -6,7 +6,7 @@ ENV SWOOLE_VERSION 4.4.12
 
 # Libs
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-  && apk add  gcc g++ libc-dev  wget vim  openssl-dev make  linux-headers  bash  g++  make autoconf \
+  && apk add  gcc g++ libc-dev wget vim openssl-dev make linux-headers bash make autoconf \
   && rm -rf /var/cache/apk/*
 
 # Composer
@@ -26,8 +26,6 @@ RUN wget http://pecl.php.net/get/redis-${PHPREDIS_VERSION}.tgz -O /tmp/redis.tar
     && pecl install /tmp/redis.tar.tgz \
     && rm -rf /tmp/redis.tar.tgz \
     && docker-php-ext-enable redis
- # 修改php.ini的文件 extension=redis.so
-
 
 RUN wget https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
