@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="index.php" method="post">
+    <label>数据库名:</label><input type="text" name="database" value=""><label>数量：</label><input type="text" name="database_num" value=""><br>
+    <label>表名:</label><input type="text" name="table" value=""><label>数量：</label><input type="text" name="tables_num" value=""><br>
+    <label>建表语句：</label><br><textarea name="sql" style="height: 500px;width: 1200px"></textarea><br>
+    <label>类型选择：</label>
+    <select name="type">
+        <option value="0">只创建数据库</option>
+        <option value="1">只创建数据表</option>
+        <option value="2">同时创建库与表</option>
+    </select>
+    <input type="submit" name="commit"><br>
+</form>
+</body>
+</html>
