@@ -1175,22 +1175,20 @@ $config['modules']['gii'] = [
 ],
 ```
 
-> 不过上面的是固定的不方便，如何动态渲染主题呢？首先我们先把配置文件中的主题配置屏蔽掉，记得先屏蔽掉。
-
-> 首先打开 backend\config\main.php 在components同级，增加如下的行为配置。记得是同级，不要放错了位置
+> 不过上面的是固定的不方便，如何动态渲染主题呢？首先我们先把配置文件中的主题配置屏蔽掉，记得先屏蔽掉。然后打开 frontend\config\main.php 在components同级，增加如下的行为配置。记得是同级，不要放错了位置
 
 ```php
 'as theme' => [
-    'class' => 'backend\components\ThemeControl',
+    'class' => 'frontend\components\ThemeControl',
 ],
 ```
 
-> 然后，我们在 backend\components 目录下新建 ThemeControl.php 文件,增加如下代码段
+> 然后，我们在 frontend\components 目录下新建 ThemeControl.php 文件,增加如下代码段
 
 ```php
 <?php
 
-namespace backend\components;
+namespace frontend\components;
 
 use Yii;
 use yii\base\Object;
