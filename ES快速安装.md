@@ -2,6 +2,8 @@
 
 ### ES快速安装
 
+Jps命令查看Java进程  如：es  logstash
+
 ```bash
 #查看已经安装的jdk版本
 [root@hadoop1 ~]# rpm -qa|grep jdk
