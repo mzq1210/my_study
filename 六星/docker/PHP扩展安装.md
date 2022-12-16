@@ -65,3 +65,7 @@ docker restart (容器名称)
 ```bash
 apt-get update && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev
 ```
+
+
+
+[安装GD库](https://blog.51cto.com/u_14508118/5857683)

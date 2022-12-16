@@ -3,20 +3,18 @@
 #### Centos 安装docker
 
 ```bash
-#1、更新update到最新的版本  
+#1、更新软件包
 yum  update
 #2、卸载老版本docker
-yum  remove docker  docker-common docker-selinux  docker-engine
+yum  remove docker docker-common docker-selinux docker-engine
 #3、安装需要的软件包
-yum install -y yum-utils  device-mapper-persistent-data lvm2
+yum install -y yum-utils device-mapper-persistent-data lvm2
 #4、设置yum源
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-#5、查看docker版本
+#5、查看docker可安装版本列表
 yum list docker-ce --showduplicates|sort -r
-#6、安装docker
-yum  install  docker-ce -y
 #6、指定版本
-yum  install  docker-ce-18.03.1.ce -y
+yum install docker-ce-18.03.1.ce -y
 #7、启动docker
 systemctl start docker
 #查看状态
@@ -28,41 +26,60 @@ vi /etc/docker/daemon.json
 {
 "registry-mirrors": ["http://hub-mirror.c.163.com"]
 }
-#10.更换docker国内源需要重启
+#10.更换docker国内源重启
 systemctl restart docker
 ```
 
 #### docker常用指令
 
 ```bash
-#1.启动
+#************************** 镜像相关 **************************
+#删除镜像，i代表image
+docker rmi  $(docker ps -a -q) 
+
+#************************** 容器相关 **************************
+#1.启动容器
 docker start 容器名
-#2.删除
+#2.删除容器
 docker rm 容器名
 #3.停止/删除所有容器
 docker stop  $(docker ps -a -q)
 docker rm  $(docker ps -a -q) 
-#删除镜像，i代表image
-docker rmi  $(docker ps -a -q) 
 
 #4.根据Dockerfile构建镜像
-docker build -t 名称 .
+docker build -t 镜像名称 .
 -t ，--tag list  #构建后的镜像名称
 -f， --file string #指定Dockerfiile文件位置
 --no-cache #不从缓存构建
-示例：
+#示例：
 1，docker build . 
 2，docker build -t redis:v1 .
 3，docker build -t redis:v2 -f /path/Dockerfile /path
 
-一般常用第2种方式构建，我们在构建时都会切换到Dockerfile文件的目录下进行构建，所以不需要指定-f参
-#查看构建镜像历史记录，方便查错
+#5.查看容器信息
+docker inspect 容器名
+#6.进入容器
+docker exec -it 容器 bash
+#7.重启容器，两种方式
+#exec代表在容器在执行一个命令
+docker restart nginx
+docker exec nginx nginx -s load
+#8.导出容器
+docker export 已存在的容器id/name > 文件名.tar
+docker save 已存在的容器id/name > 文件名.tar
+#9.导入容器
+docker import 文件名.tar 容器自定义name
+docker load < 文件名.tar
+
+#************************** 镜像/容器日志排错 **************************
+#构建镜像历史记录
 docker history 镜像ID
-#查看构建容器日志，方便查错
+#构建容器日志
 docker logs 容器id
+
 #Dockerfile调错：有一种情况是无法查看日志，一构建就退出，找不到原因，那就先把dockerfile文件中的CMD命令注释掉，docker run 构建的命令最后加上bash,直接进入容器运行应用启动命令
 
-#5、使用此docker镜像 创建容器
+#10、使用此docker镜像 创建容器
 docker run -itd --name  redis-master  --net mynetwork  -p 6380:6379  --ip 192.168.1.2  redis 
 -d:     后台运行容器，并返回容器ID；  
 -i:     以交互模式运行容器，通常与 -t 同时使用；
@@ -71,27 +88,9 @@ docker run -itd --name  redis-master  --net mynetwork  -p 6380:6379  --ip 192.16
 -V:     为容器挂载目录，比如 /usr/docker/data:/data 前者为数宿主机目录后者为容器内目录
 --ip:   为容器制定一个固定的ip 
 --net:  指定网络模式
-
-#6.查看容器信息
-docker inspect 容器名
-
-#7.进入容器
-docker exec -it 容器 bash
-
-#8.重启容器，两种方式
-#exec代表在容器在执行一个命令
-docker restart nginx
-docker exec nginx nginx -s load
-
-#导出容器
-docker export 已存在的容器id/name > 文件名.tar
-docker save 已存在的容器id/name > 文件名.tar
-#导入容器
-docker import 文件名.tar 容器自定义name
-docker load < 文件名.tar
 ```
 
-> 注意他们与save\load的区别，两对命令都能导入导出，save方式导出的文件比export方式导出的文件大，因为save方式保存了镜像的历史和层，使其可以回滚到之前的历史层。反观export方式，在导出过程中丢失所有的历史，导致其不可以层回滚，导出的文件会小一些。
+> 注意容器导入导出的区别，两对命令都能导入导出，save方式导出的文件比export方式导出的文件大，因为save方式保存了镜像的历史和层，使其可以回滚到之前的历史层。反观export方式，在导出过程中丢失所有的历史，导致其不可以层回滚，导出的文件会小一些。
 
 #### 容器网络
 
@@ -101,7 +100,6 @@ docker network ls
 
 #默认情况下启动Docker容器都是使用桥接方式bridge，每次Docker容器重启时，会按照顺序获取对应的IP地址，这个就导致重启下，Docker的IP地址就变了。所以我们需要创建自定义网络并指定网段：192.168.1.0/24，命名为mynetwork
 docker network create --subnet=192.168.1.0/24 mynetwork
-docker network ls
 
 #查看自定义网络信息
 docker network inspect mynetwork
@@ -112,21 +110,20 @@ docker network inspect 容器id
 iptables -t nat -L -n
 ```
 
+> **Mac上docker-connector给容器设置固定ip：**
+>
+> docker创建网卡之后把子网ip加入 /usr/local/etc/docker-connector.conf，无需重启
+
 #### 配置redis主从
 
 原理步骤，可以通过redis的log日志查看：
 
-1.在【从】节点设置slaveof的时候保存主节点信息
-
-2.【从】节点会通过定时任务不断请求【主】节点建立socket连接
-
-3.【从】节点会发送ping命令，ping不通的话也会通过定时任务不断请求
-
-4.权限验证，验证密码等
-
-5.同步数据集，这里第一次是全量复制，主节点压力会非常大，可能影响正常业务
-
-6.命令持续复制，增量复制。如果存在多个【从】节点，数据同步是主节点依次向每个【从】节点推送数据，而不是从节点去获取，并且是一个一个推，而不是同时推
+1. 在【从】节点设置slaveof的时候保存主节点信息
+2. 【从】节点会通过定时任务不断请求【主】节点建立socket连接
+3. 【从】节点会发送ping命令，ping不通的话也会通过定时任务不断请求
+4. 权限验证，验证密码等
+5. 同步数据集，这里第一次是全量复制，主节点压力会非常大，可能影响正常业务
+6. 命令持续复制，增量复制。如果存在多个【从】节点，数据同步是主节点依次向每个【从】节点推送数据，而不是从节点去获取，并且是一个一个推，而不是同时推
 
 ```bash
 #1.通过docker命令分别运行redis容器
@@ -643,11 +640,7 @@ location ~ \.php$ {
 
 
 
-
-
 扩展参考
 [官方镜像站](https://hub.docker.com/search?q=mysql)
 [阿里云镜像站](https://developer.aliyun.com/mirror/) 
 [网易云镜像](https://c.163yun.com/hub)
-
-[安装GD库](https://blog.51cto.com/u_14508118/5857683)
