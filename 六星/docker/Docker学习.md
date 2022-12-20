@@ -638,7 +638,8 @@ location ~ \.php$ {
 >
 >#fastcgi_param  PATH_INFO           $path_info;#可自定义变量  
 
-
+[自定义安装php7.x并且安装源码扩展、pecl扩展、及其他扩展](https://blog.csdn.net/sltin/article/details/95511356)
+[自动检测网络环境下哪个源最快](https://gitcode.net/mirrors/silenceshell/docker_mirror)
 
 扩展参考
 [官方镜像站](https://hub.docker.com/search?q=mysql)

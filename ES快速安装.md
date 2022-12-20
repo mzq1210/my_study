@@ -68,3 +68,5 @@ location / {
 [解决nohup.out文件过大](https://blog.csdn.net/qq_43318840/article/details/120408785)
 
 [xpack ca证书](https://blog.csdn.net/less_more548/article/details/108200433)
+
+[设置简易无证书密码](https://www.jianshu.com/p/f67aaf21d069)
