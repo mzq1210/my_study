@@ -26,8 +26,11 @@ vi /etc/docker/daemon.json
 {
 "registry-mirrors": ["http://hub-mirror.c.163.com"]
 }
-#10.更换docker国内源重启
+
+#10.1 更换docker国内源重启
 systemctl restart docker
+#10.2 Mac重启
+brew services restart docker
 ```
 
 #### docker常用指令
@@ -637,6 +640,15 @@ location ~ \.php$ {
 >fastcgi_param  SERVER_NAME        $server_name; #服务器名，域名在server配置中指定的server_name  
 >
 >#fastcgi_param  PATH_INFO           $path_info;#可自定义变量  
+
+**7.error pulling image configuration: download failed after attempts=6: dial tc**
+
+```bash
+#这是因为更换镜像源之后没有重启docker
+brew services restart docker
+```
+
+
 
 [自定义安装php7.x并且安装源码扩展、pecl扩展、及其他扩展](https://blog.csdn.net/sltin/article/details/95511356)
 [自动检测网络环境下哪个源最快](https://gitcode.net/mirrors/silenceshell/docker_mirror)
