@@ -4,7 +4,9 @@
 
 ### 什么是nginx？
 
-Nginx是一个web服务器和方向代理服务器,缓存服务器，用于HTTP、HTTPS、SMTP、POP3和IMAP协议。
+Nginx是一个web服务器和
+
+P、HTTPS、SMTP、POP3和IMAP协议。
 
 ### 为什么使用nginx
 

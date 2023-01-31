@@ -102,12 +102,12 @@ docker run -itd --name  redis-master  --net mynetwork  -p 6380:6379  --ip 192.16
 docker network ls
 
 #默认情况下启动Docker容器都是使用桥接方式bridge，每次Docker容器重启时，会按照顺序获取对应的IP地址，这个就导致重启下，Docker的IP地址就变了。所以我们需要创建自定义网络并指定网段：192.168.1.0/24，命名为mynetwork
-docker network create --subnet=192.168.1.0/24 mynetwork
+docker network create --subnet=192.168.1.0/24 my-network
 
 #查看自定义网络信息
 docker network inspect mynetwork
 #查看某个容器的网络信息
-docker network inspect 容器id
+docker inspect 容器id
 
 #查看端口的绑定情况
 iptables -t nat -L -n
