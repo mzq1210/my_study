@@ -10,13 +10,6 @@ class MyException extends \Exception
 
 ```php
 <?php
-/**
- * Created by PhpStorm.
- * User: tan
- * Date: 2018/6/7
- * Time: 10:19
- */
-
 namespace h5\controllers;
 
 use h5\filter\MyException;
@@ -26,7 +19,6 @@ class ArtController extends BaseController{
 
     public function actionIndex(){
         echo '我是Index';
-
     }
 
     public function runAction($id, $params = [])
@@ -35,7 +27,6 @@ class ArtController extends BaseController{
         try {
             if(1 == 1){
                 throw new Exception('34534534534534534');
-//                throw new MyException('这就是对的');
             }
             return parent::runAction($id, $params);
         } catch (MyException $myException) {

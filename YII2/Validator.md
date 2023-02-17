@@ -1,6 +1,4 @@
-### Validator
-
-> Yii 提供一系列常用的核心验证器，位于 `yii\validators` 命名空间之下。 为了避免使用冗长的类名，你可以直接用**别名**来指定相应的核心验证器，比如 `required`，[yii\validators\Validator::$builtInValidators](https://www.yiiframework.com/doc/api/2.0/yii-validators-validator#$builtInValidators-detail) 属性声明了所有被支持的验证器别名。即：
+#### 常用的核心验证器
 
 ```php
 [
@@ -35,15 +33,14 @@
 ]
 ```
 
-## [boolean（布尔型）](https://www.yiiframework.com/doc/api/2.0/yii-validators-booleanvalidator)
+#### Boolean型
 
 ```php
 [
     // 检查 "selected" 是否为 0 或 1，无视数据类型
     ['selected', 'boolean'],
-
     // 检查 "deleted" 是否为布尔类型，即 true 或 false
-    ['deleted', 'boolean', 'trueValue' => true, 'falseValue' => false, 'strict' => true],
+    ['deleted', 'boolean', 'trueValue' => true, 'falseValue' => false, 'strict' => false],
 ]
 ```
 
@@ -53,9 +50,9 @@
 - `falseValue`：代表**假**的值。默认为 `'0'`。
 - `strict`：是否要求待测输入必须严格匹配 `trueValue` 或 `falseValue`。默认为 `false`。
 
-> **注意：** 因为通过 HTML 表单传递的输入数据都是字符串类型，所以一般情况下需要保持 [strict](https://www.yiiframework.com/doc/api/2.0/yii-validators-booleanvalidator#$strict-detail) 属性为假。
+> **注意：** 因为通过 HTML 表单传递的输入数据都是字符串类型，所以一般情况下需要保持 **strict**属性为假。
 
-## [captcha（验证码）](https://www.yiiframework.com/doc/api/2.0/yii-captcha-captchavalidator)
+#### captcha 验证码
 
 ```javascript
 [
@@ -63,22 +60,20 @@
 ]
 ```
 
-该验证器通常配合 [yii\captcha\CaptchaAction](https://www.yiiframework.com/doc/api/2.0/yii-captcha-captchaaction) 以及 [yii\captcha\Captcha](https://www.yiiframework.com/doc/api/2.0/yii-captcha-captcha) 使用，以确保某一输入与 [CAPTCHA](https://www.yiiframework.com/doc/api/2.0/yii-captcha-captcha) 小部件所显示的验证代码（verification code）相同。
+该验证器通常配合 yii\captcha\CaptchaAction 以及 yii\captcha\Captcha 使用，以确保某一输入与 CAPTCHA小部件所显示的验证代码（verification code）相同。
 
 - `caseSensitive`：对验证码的比对是否要求大小写敏感。默认为 false。
-- `captchaAction`：指向用于渲染 CAPTCHA 图片的 [CAPTCHA action](https://www.yiiframework.com/doc/api/2.0/yii-captcha-captchaaction) 的 [路由](https://www.yiiframework.com/doc/guide/2.0/zh-cn/structure-controllers#routes)。默认为 `'site/captcha'`。
+- `captchaAction`：指向用于渲染 CAPTCHA 图片的 CAPTCHA action 的路由。默认为 `'site/captcha'`。
 - `skipOnEmpty`：当输入为空时，是否跳过验证。 默认为 false，也就是输入值为必需项。
 
-## [compare（比对）](https://www.yiiframework.com/doc/api/2.0/yii-validators-comparevalidator)
+#### compare 比对
 
 ```php
 [
     // 检查 "password" 属性的值是否与 "password_repeat" 的值相同
     ['password', 'compare'],
-
     // 和上一个相同，只是明确指定了需要对比的属性字段
     ['password', 'compare', 'compareAttribute' => 'password_repeat'],
-
     // 检查年龄是否大于等于 30
     ['age', 'compare', 'compareValue' => 30, 'operator' => '>='],
 ]
@@ -97,11 +92,11 @@
   - `>=`：检查待测目标值是否大于等于给定被测值。
   - `<`：检查待测目标值是否小于给定被测值。
   - `<=`：检查待测目标值是否小于等于给定被测值。
-- `type`: 默认的比对类型是'[string](https://www.yiiframework.com/doc/api/2.0/yii-validators-comparevalidator#TYPE_STRING-detail)'，此时将按照字节逐个对比。 当需要比对的值是数字时，需要设置类型[$type](https://www.yiiframework.com/doc/api/2.0/yii-validators-comparevalidator#$type-detail)为 '[number](https://www.yiiframework.com/doc/api/2.0/yii-validators-comparevalidator#TYPE_NUMBER-detail)'，启用数字对比模式。
+- `type`: 默认的比对类型是'string'，此时将按照字节逐个对比。 当需要比对的值是数字时，需要设置类型type为 'number'，启用数字对比模式。
 
-### 比对日期值
+#### 比对日期值
 
-比对验证器只能用来对比字符串和数字。如果你需要比对日期，有两种方式。 如果需要比对一个固定的日期值，只需要使用 [date](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator)验证器并设置对应的属性 [$min](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator#$min-detail) 或 [$max](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator#$max-detail) 。 如果需要比对如表单提交的两个日期，比如一个`fromDate`和一个`toDate`项， 你可以结合比对验证器和日期验证器同时使用，如下所示：
+比对日期有两种方式。 如果需要比对一个固定的日期值，只需要使用 date验证器并设置对应的属性 $min 或 $max。 如果需要比对如表单提交的两个日期，比如一个`fromDate`和一个`toDate`项， 你可以结合比对验证器和日期验证器同时使用，如下所示：
 
 ```php
 ['fromDate', 'date', 'timestampAttribute' => 'fromDate'],
@@ -109,11 +104,11 @@
 ['fromDate', 'compare', 'compareAttribute' => 'toDate', 'operator' => '<', 'enableClientValidation' => false],
 ```
 
-因为验证器会按照顺序执行， 将首先验证 `fromDate` 和 `toDate` 字段是一个有效的日期值，最终将被转换成一个系统可识别的格式。 此后这两个值将使用比对验证器进行比对。 因日期验证器只提供服务端使用，当前不提供客户端验证， 故 [$enableClientValidation](https://www.yiiframework.com/doc/api/2.0/yii-validators-validator#$enableClientValidation-detail) 在比对验证器将同样被设置为 `false` 。
+因为验证器会按照顺序执行， 将首先验证 `fromDate` 和 `toDate` 字段是一个有效的日期值，最终将被转换成一个系统可识别的格式。 此后这两个值将使用比对验证器进行比对。 因日期验证器只提供服务端使用，当前不提供客户端验证， 故 $enableClientValidation在比对验证器将同样被设置为 `false` 。
 
-## [date（日期）](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator)
+#### date 日期
 
-此日期 [date](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator) 验证器有三种不同的使用方式：
+此日期 date 验证器有三种不同的使用方式：
 
 ```php
 [
@@ -123,28 +118,16 @@
 ]
 ```
 
-该验证器检查输入值是否为适当格式的 date，time，或者 datetime。 另外，它还可以帮你把输入值转换为一个 UNIX 时间戳并保存到 [timestampAttribute](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator#$timestampAttribute-detail) 所指定的属性里。
+该验证器检查输入值是否为适当格式的 date，time，或者 datetime。 另外，它还可以帮你把输入值转换为一个 UNIX 时间戳并保存到 timestampAttribute 所指定的属性里。
 
-- `format`：被验证值的日期/时间格式。 这里的值可以是 [ICU manual](http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax) 中定义的日期时间格式。 另外还可以设置以 `php:` 开头的字符串，用来表示PHP可以识别的日期时间格式。 `Datetime` 日期时间类。请参考 https://secure.php.net/manual/en/datetime.createfromformat.php 获取更多支持的格式。 如果没有设置，默认值将使用 `Yii::$app->formatter->dateFormat` 中的值。 请参考 [API 文档](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator#$format-detail) 以获取更详细的说明。
+- `format`：被验证值的日期/时间格式。 这里的值可以是 ICU manual  中定义的日期时间格式。 另外还可以设置以 `php:` 开头的字符串，用来表示PHP可以识别的日期时间格式。 `Datetime` 日期时间类。
 
-- `timestampAttribute`：输入的日期时间将被转换为时间戳后设置到的属性的名称。 可以设置为和被验证的属性相同。如果相同， 原始值将在验证结束后被时间戳覆盖。 请参考 ["Handling date input with the DatePicker"](https://github.com/yiisoft/yii2-jui/blob/master/docs/guide/topics-date-picker.md) 以获取更多使用事例。
+- `timestampAttribute`：输入的日期时间将被转换为时间戳后设置到的属性的名称。 可以设置为和被验证的属性相同。如果相同， 原始值将在验证结束后被时间戳覆盖。 请参考 ["Handling date input with the DatePicker"]  以获取更多使用事例。
 
-  从版本 2.0.4 开始，支持 使用 [$timestampAttributeFormat](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator#$timestampAttributeFormat-detail) 设置日期时间格式 和使用 [$timestampAttributeTimeZone](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator#$timestampAttributeTimeZone-detail) 设置时区。
+  注意，如果使用 `timestampAttribute`，被验证的值将被转换为UTC标准的时间戳， 所以使用 input time zone 输入的时区将被转换为UTC时间。
 
-  注意，如果使用 `timestampAttribute`，被验证的值将被转换为UTC标准的时间戳， 所以使用 [input time zone](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator#$timeZone-detail) 输入的时区将被转换为UTC时间。
 
-- 自版本 2.0.4 开始支持 直接对 [minimum](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator#$min-detail) 和 [maximum](https://www.yiiframework.com/doc/api/2.0/yii-validators-datevalidator#$max-detail) 设置时间戳。
-
-如果输入的值是可选的，可以设置一个 [默认值验证器](https://www.yiiframework.com/doc/guide/2.0/zh-cn/tutorial-core-validators#default) 来确保空值通过验证器验证后的值是 `null`， 否则数据库可能会保存类似 `0000-00-00` 的值， 或表单日期选择器会显示 `1970-01-01` 。
-
-```php
-[
-    [['from_date', 'to_date'], 'default', 'value' => null],
-    [['from_date', 'to_date'], 'date'],
-],
-```
-
-## [default（默认值）](https://www.yiiframework.com/doc/api/2.0/yii-validators-defaultvaluevalidator)
+#### default 默认值
 
 ```php
 [
@@ -170,9 +153,7 @@ function foo($model, $attribute) {
 }
 ```
 
-> **信息：** 如何判断待测值是否为空， 被写在另外一个话题的 [处理空输入](https://www.yiiframework.com/doc/guide/2.0/zh-cn/input-validation#handling-empty-inputs)章节。
-
-## [double（双精度浮点型）](https://www.yiiframework.com/doc/api/2.0/yii-validators-numbervalidator)
+#### double 双精度浮点型
 
 ```php
 [
@@ -181,14 +162,12 @@ function foo($model, $attribute) {
 ]
 ```
 
-该验证器检查输入值是否为双精度浮点数。等效于 [number](https://www.yiiframework.com/doc/guide/2.0/zh-cn/tutorial-core-validators#number) 验证器。
+该验证器检查输入值是否为双精度浮点数。等效于 number 验证器。
 
 - `max`：上限值（含界点）。若不设置，则验证器不检查上限。
 - `min`：下限值（含界点）。若不设置，则验证器不检查下限。
 
-## [each（循环验证）](https://www.yiiframework.com/doc/api/2.0/yii-validators-eachvalidator)
-
-> **信息：** 此验证器自版本 2.0.4 后可用。
+#### each 循环验证
 
 ```php
 [
@@ -204,7 +183,7 @@ function foo($model, $attribute) {
 
 > **注意：** 如果被验证的值不是一个数组，将被认为验证失败， 并且返回 `message` 设定的错误信息。
 
-## [email（电子邮件）](https://www.yiiframework.com/doc/api/2.0/yii-validators-emailvalidator)
+#### email 电子邮件
 
 ```php
 [
@@ -219,7 +198,7 @@ function foo($model, $attribute) {
 - `checkDNS`：检查邮箱域名是否存在，且有没有对应的 A 或 MX 记录。 不过要知道，有的时候该项检查可能会因为临时性 DNS 故障而失败， 哪怕它其实是有效的。默认为 false。
 - `enableIDN`：验证过程是否应该考虑 IDN（internationalized domain names，国际化域名，也称多语种域名，比如中文域名）。 默认为 false。要注意但是为使用 IDN 验证功能， 请先确保安装并开启 `intl` PHP 扩展，不然会导致抛出异常。
 
-## [exist（存在性）](https://www.yiiframework.com/doc/api/2.0/yii-validators-existvalidator)
+#### exist 存在性
 
 ```php
 [
@@ -251,13 +230,13 @@ function foo($model, $attribute) {
 
 可以使用此验证器验证单个数据列或多个数据列 （如多个列不同的组合是否存在）。
 
-- `targetClass`：用于查找输入值的目标 [AR](https://www.yiiframework.com/doc/guide/2.0/zh-cn/db-active-record) 类。 若不设置，则会使用正在进行验证的当前模型类。
+- `targetClass`：用于查找输入值的目标 AR 类。 若不设置，则会使用正在进行验证的当前模型类。
 - `targetAttribute`：用于检查输入值存在性的 `targetClass` 的模型属性。 若不设置，它会直接使用待测属性名（整个参数数组的首元素）。 除了指定为字符串以外，你也可以用数组的形式，同时指定多个用于验证的表字段， 数组的键和值都是代表字段的属性名，值表示 `targetClass` 的待测数据源字段，而键表示当前模型的待测属性名。 若键和值相同，你可以只指定值。（如:`['a2']` 就代表 `['a2'=>'a2']`）
 - `targetRelation`: since version 2.0.14 you can use convenient attribute `targetRelation`, which overrides the `targetClass` and `targetAttribute` attributes using specs from the requested relation.
-- `filter`：用于检查输入值存在性必然会进行数据库查询，而该属性为用于进一步筛选该查询的过滤条件。 可以为代表额外查询条件的字符串或数组（关于查询条件的格式，请参考 [yii\db\Query::where()](https://www.yiiframework.com/doc/api/2.0/yii-db-query#where()-detail)）； 或者样式为 `function ($query)` 的匿名函数， `$query` 参数为你希望在该函数内进行修改的 [Query](https://www.yiiframework.com/doc/api/2.0/yii-db-query) 对象。
+- `filter`：用于检查输入值存在性必然会进行数据库查询，而该属性为用于进一步筛选该查询的过滤条件。 可以为代表额外查询条件的字符串或数组； 或者样式为 `function ($query)` 的匿名函数， `$query` 参数为你希望在该函数内进行修改的 Query 对象。
 - `allowArray`：是否允许输入值为数组。默认为 false。 若该属性为 true 且输入值为数组，则数组的每个元素都必须在目标字段中存在。 值得注意的是，若用吧 `targetAttribute` 设为多元素数组来验证被测值在多字段中的存在性时，该属性不能设置为 true。
 
-## [file（文件）](https://www.yiiframework.com/doc/api/2.0/yii-validators-filevalidator)
+#### file 文件
 
 ```php
 [
@@ -270,15 +249,15 @@ function foo($model, $attribute) {
 该验证器检查输入值是否为一个有效的上传文件。
 
 - `extensions`：可接受上传的文件扩展名列表。它可以是数组， 也可以是用空格或逗号分隔各个扩展名的字符串 (如 "gif, jpg")。 扩展名大小写不敏感。默认为 null， 意味着所有扩展名都被接受。
-- `mimeTypes`：可接受上传的 MIME 类型列表。 它可以是数组，也可以是用空格或逗号分隔各个 MIME 的字符串 (如 "image/jpeg, image/png")。 Mime 类型名是大小写不敏感的。默认为 null， 意味着所有 MIME 类型都被接受。 请参考 [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types) 获取更多详细内容。
+- `mimeTypes`：可接受上传的 MIME 类型列表。 它可以是数组，也可以是用空格或逗号分隔各个 MIME 的字符串 (如 "image/jpeg, image/png")。 Mime 类型名是大小写不敏感的。默认为 null， 意味着所有 MIME 类型都被接受。
 - `minSize`：上传文件所需最少多少 Byte 的大小。默认为 null，代表没有下限。
 - `maxSize`：上传文件所需最多多少 Byte 的大小。默认为 null，代表没有上限。
 - `maxFiles`：给定属性最多能承载多少个文件。 默认为 1，代表只允许单文件上传。 若值大于一，那么输入值必须为包含最多 `maxFiles` 个上传文件元素的数组。
 - `checkExtensionByMimeType`：是否通过文件的 MIME 类型来判断其文件扩展。 若由 MIME 判定的文件扩展与给定文件的扩展不一样，则文件会被认为无效。 默认为 true，代表执行上述检测。
 
-`FileValidator` 通常与 [yii\web\UploadedFile](https://www.yiiframework.com/doc/api/2.0/yii-web-uploadedfile) 共同使用。 请参考 [文件上传](https://www.yiiframework.com/doc/guide/2.0/zh-cn/input-file-upload)章节来了解有关文件上传与上传文件的检验的全部内容。
+`FileValidator` 通常与 yii\web\UploadedFile
 
-## [filter（过滤器）](https://www.yiiframework.com/doc/api/2.0/yii-validators-filtervalidator)
+#### filter 过滤器
 
 ```php
 [
@@ -304,16 +283,16 @@ function foo($model, $attribute) {
 - `filter`：用于定义过滤器的 PHP 回调函数。可以为全局函数名，匿名函数，或其他。 该函数的样式必须是 `function ($value) { return $newValue; }`。该属性不能省略，必须设置。
 - `skipOnArray`：是否在输入值为数组时跳过过滤器。默认为 false。 请注意如果过滤器不能处理数组输入，你就应该把该属性设为 true。 否则可能会导致 PHP Error 的发生。
 
-> **提示：** 如果你只是想要用 trim 处理下输入值，你可以直接用 [trim](https://www.yiiframework.com/doc/guide/2.0/zh-cn/tutorial-core-validators#trim) 验证器的。
+> **提示：** 如果你只是想要用 trim 处理下输入值，你可以直接用 trim验证器的。
 
-> **提示：** 有许多的PHP方法结构和 `filter` 需要的结构一致。 比如使用类型转换方法 ([intval](https://secure.php.net/manual/en/function.intval.php)， [boolval](https://secure.php.net/manual/en/function.boolval.php), ...) 来确保属性为指定的类型， 你可以简单的设置这些方法名而不是重新定义一个匿名函数：
+> **提示：** 有许多的PHP方法结构和 `filter` 需要的结构一致。 比如使用类型转换方法 intval， boolval来确保属性为指定的类型， 你可以简单的设置这些方法名而不是重新定义一个匿名函数：
 >
 > ```php
 > ['property', 'filter', 'filter' => 'boolval'],
 > ['property', 'filter', 'filter' => 'intval'],
 > ```
 
-## [image（图片）](https://www.yiiframework.com/doc/api/2.0/yii-validators-imagevalidator)
+#### image 图片
 
 ```php
 [
@@ -325,14 +304,14 @@ function foo($model, $attribute) {
 ]
 ```
 
-该验证器检查输入值是否为代表有效的图片文件。它继承自 [file](https://www.yiiframework.com/doc/guide/2.0/zh-cn/tutorial-core-validators#file) 验证器， 并因此继承有其全部属性。除此之外， 它还支持以下为图片检验而设的额外属性：
+该验证器检查输入值是否为代表有效的图片文件。它继承自 file 验证器， 并因此继承有其全部属性。除此之外， 它还支持以下为图片检验而设的额外属性：
 
 - `minWidth`：图片的最小宽度。默认为 null，代表无下限。
 - `maxWidth`：图片的最大宽度。默认为 null，代表无上限。
 - `minHeight`：图片的最小高度。 默认为 null，代表无下限。
 - `maxHeight`：图片的最大高度。默认为 null，代表无上限。
 
-## [ip（IP地址）](https://www.yiiframework.com/doc/api/2.0/yii-validators-ipvalidator)
+#### IP地址
 
 ```php
 [
@@ -409,7 +388,7 @@ function foo($model, $attribute) {
 
 > **信息：** 此验证器自版本 2.0.7 后可用。
 
-## [in（范围）](https://www.yiiframework.com/doc/api/2.0/yii-validators-rangevalidator)
+#### in 范围
 
 ```php
 [
@@ -425,7 +404,7 @@ function foo($model, $attribute) {
 - `not`：是否对验证的结果取反。默认为 false。当该属性被设置为 true， 验证器检查输入值是否**不在**给定列表内。
 - `allowArray`：是否接受输入值为数组。当该值为 true 且输入值为数组时， 数组内的每一个元素都必须在给定列表内存在，否则返回验证失败。
 
-## [integer（整数）](https://www.yiiframework.com/doc/api/2.0/yii-validators-numbervalidator)
+#### integer 整数
 
 ```php
 [
@@ -439,7 +418,7 @@ function foo($model, $attribute) {
 - `max`：上限值（含界点）。若不设置，则验证器不检查上限。
 - `min`：下限值（含界点）。若不设置，则验证器不检查下限。
 
-## [match（正则表达式）](https://www.yiiframework.com/doc/api/2.0/yii-validators-regularexpressionvalidator)
+#### match 正则表达式
 
 ```php
 [
@@ -453,7 +432,7 @@ function foo($model, $attribute) {
 - `pattern`：用于检测输入值的正则表达式。该属性是必须的， 若不设置则会抛出异常。
 - `not`：是否对验证的结果取反。默认为 false， 代表输入值匹配正则表达式时验证成功。如果设为 true， 则输入值不匹配正则时返回匹配成功。
 
-## [number（数字）](https://www.yiiframework.com/doc/api/2.0/yii-validators-numbervalidator)
+#### number 数字
 
 ```php
 [
@@ -462,12 +441,12 @@ function foo($model, $attribute) {
 ]
 ```
 
-该验证器检查输入值是否为数字。他等效于 [double](https://www.yiiframework.com/doc/guide/2.0/zh-cn/tutorial-core-validators#double) 验证器。
+该验证器检查输入值是否为数字。他等效于 double 验证器。
 
 - `max`：上限值（含界点）。若不设置，则验证器不检查上限。
 - `min`：下限值（含界点）。若不设置，则验证器不检查下限。
 
-## [required（必填）](https://www.yiiframework.com/doc/api/2.0/yii-validators-requiredvalidator)
+#### required 必填
 
 ```php
 [
@@ -481,39 +460,8 @@ function foo($model, $attribute) {
 - `requiredValue`：所期望的输入值。若没设置，意味着输入不能为空。
 - `strict`：检查输入值时是否检查类型。默认为 false。 当没有设置 `requiredValue` 属性时，若该属性为 true， 验证器会检查输入值是否严格为 null；若该属性设为 false， 该验证器会用一个更加宽松的规则检验输入值是否为空。 当设置了 `requiredValue` 属性时，若该属性为 true，输入值与 `requiredValue` 的比对会同时检查数据类型。
 
-> **注意：** 如何判断待测值是否为空，被写在另外一个话题的 [处理空输入](https://www.yiiframework.com/doc/guide/2.0/zh-cn/input-validation#handling-empty-inputs)章节。
 
-## [safe（安全）](https://www.yiiframework.com/doc/api/2.0/yii-validators-safevalidator)
-
-```php
-[
-    // 标记 "description" 为安全属性
-    ['description', 'safe'],
-]
-```
-
-该验证器并不进行数据验证。而是把一个属性标记为 [安全属性](https://www.yiiframework.com/doc/guide/2.0/zh-cn/structure-models#safe-attributes)。
-
-## [string（字符串）](https://www.yiiframework.com/doc/api/2.0/yii-validators-stringvalidator)
-
-```php
-[
-    // 检查 "username" 是否为长度 4 到 24 之间的字符串
-    ['username', 'string', 'length' => [4, 24]],
-]
-```
-
-该验证器检查输入值是否为特定长度的字符串。并检查属性的值是否为某个特定长度。
-
-- length：指定待测输入字符串的长度限制。 该属性可以被指定为以下格式之一：
-  - 证书：the exact length that the string should be of;
-  - 单元素数组：代表输入字符串的最小长度 (e.g. `[8]`)。这会重写 `min` 属性。
-  - 包含两个元素的数组：代表输入字符串的最小和最大长度(e.g. `[8, 128]`)。 这会同时重写 `min` 和 `max` 属性。
-- `min`：输入字符串的最小长度。若不设置，则代表不设下限。
-- `max`：输入字符串的最大长度。若不设置，则代表不设上限。
-- `encoding`：待测字符串的编码方式。若不设置，则使用应用自身的 [charset](https://www.yiiframework.com/doc/api/2.0/yii-base-application#$charset-detail) 属性值， 该值默认为 `UTF-8`。
-
-## [trim](https://www.yiiframework.com/doc/api/2.0/yii-validators-filtervalidator)
+#### trim
 
 ```php
 [
@@ -524,7 +472,7 @@ function foo($model, $attribute) {
 
 该验证器并不进行数据验证。而是，trim 掉输入值两侧的多余空格。 注意若该输入值为数组，那它会忽略掉该验证器。
 
-## [unique（唯一性）](https://www.yiiframework.com/doc/api/2.0/yii-validators-uniquevalidator)
+#### unique 唯一性
 
 ```php
 [
@@ -545,13 +493,13 @@ function foo($model, $attribute) {
 ]
 ```
 
-该验证器检查输入值是否在某表字段中唯一。 它只对[活动记录](https://www.yiiframework.com/doc/guide/2.0/zh-cn/db-active-record)类型的模型类属性起作用， 能支持对一个或多过字段的验证。
+该验证器检查输入值是否在某表字段中唯一。 它只对活动记录类型的模型类属性起作用， 能支持对一个或多过字段的验证。
 
-- `targetClass`：用于查找输入值的目标 [AR](https://www.yiiframework.com/doc/guide/2.0/zh-cn/db-active-record) 类。 若不设置，则会使用正在进行验证的当前模型类。
+- `targetClass`：用于查找输入值的目标 AR 类。 若不设置，则会使用正在进行验证的当前模型类。
 - `targetAttribute`：用于检查输入值唯一性的 `targetClass` 的模型属性。 若不设置，它会直接使用待测属性名（整个参数数组的首元素）。 除了指定为字符串以外，你也可以用数组的形式，同时指定多个用于验证的表字段，数组的键和值都是代表字段的属性名， 值表示 `targetClass` 的待测数据源字段，而键表示当前模型的待测属性名。 若键和值相同，你可以只指定值。（如:`['a2']` 就代表 `['a2'=>'a2']`）
-- `filter`：用于检查输入值唯一性必然会进行数据库查询， 而该属性为用于进一步筛选该查询的过滤条件。可以为代表额外查询条件的字符串或数组 （关于查询条件的格式，请参考 [yii\db\Query::where()](https://www.yiiframework.com/doc/api/2.0/yii-db-query#where()-detail)）；或者样式为 `function ($query)` 的匿名函数， `$query` 参数为你希望在该函数内进行修改的 [Query](https://www.yiiframework.com/doc/api/2.0/yii-db-query) 对象。
+- `filter`：用于检查输入值唯一性必然会进行数据库查询， 而该属性为用于进一步筛选该查询的过滤条件。可以为代表额外查询条件的字符串或数组 （关于查询条件的格式，请参考 yii\db\Query::where()；或者样式为 `function ($query)` 的匿名函数， `$query` 参数为你希望在该函数内进行修改的 Query 对象。
 
-## [url（网址）](https://www.yiiframework.com/doc/api/2.0/yii-validators-urlvalidator)
+#### url 网址
 
 ```php
 [
