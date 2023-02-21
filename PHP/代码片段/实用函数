@@ -19,3 +19,29 @@ echo chr(052);   // *
 echo chr(0x52);  // R
 ```
 
+函数组合
+
+```php
+//初始化数组
+$initArr = array_fill(1, 7, 0);
+$data = Customer::find()->select('total')->indexBy('status')->groupBy('status')->column();
+//合并数字
+return array_replace_recursive($initArr, $data);
+```
+
+删除匹配的文件
+
+```php
+$csv = glob($path . "DAY_*");
+array_map('unlink', $csv);
+```
+
+**extract()** 从数组中将变量导入到当前的符号表，常用于把变量数据输出到视图页面，如yii2的rander()
+
+```php
+$arr = ["a" => "Cat","b" => "Dog", "c" => "Horse"];
+extract($arr);
+echo "\$a = $a; \$b = $b; \$c = $c";
+// 结果：$a = Cat; $b = Dog; $c = Horse
+```
+

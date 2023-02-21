@@ -1,3 +1,5 @@
+#### 加密解密
+
 ```php
 class sys {
 	
@@ -69,3 +71,44 @@ echo chr(52);    // 4
 echo chr(052);   // *
 echo chr(0x52);  // R
 ```
+
+#### 数组与xml转换
+
+```php
+//数组转XML
+function arrayToXml($arr)
+{
+    $xml = "<xml>";
+    foreach ($arr as $key=>$val)
+    {
+        if (is_numeric($val)){
+            $xml.="<".$key.">".$val."</".$key.">";
+        }else{
+            $xml.="<".$key."><![CDATA[".$val."]]></".$key.">";
+        }
+    }
+    $xml.="</xml>";
+    return $xml;
+}
+
+//将XML转为array
+function xmlToArray($xml)
+{    
+    //禁止引用外部xml实体
+    libxml_disable_entity_loader(true);
+    $values = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);        
+    return $values;
+}
+```
+
+#### 去重简单几种方法
+
+```php
+array_unique()
+//在数据量比较大时比array_unique快
+array_flip()
+//组合使用
+$array = array_flip($array);
+$array = array_keys($array);
+```
+

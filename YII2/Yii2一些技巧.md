@@ -134,3 +134,21 @@ $.ajax({
   dataType: dataType
 });
 ```
+
+文件操作
+
+```php
+// 遍历一个文件夹下文件&子文件夹
+FileHelper::findFiles('/path/to/search/');
+FileHelper::findFiles('.', ['only' => ['*.php', '*.txt']]); // 只返回php和txt文件
+FileHelper::findFiles('.', ['except' => ['*.php', '*.txt']]); // 排除php和txt文件
+// 获得指定文件的MIME类型
+FileHelper::getMimeType('/path/to/img.jpeg');
+// 复制文件夹
+FileHelper::copyDirectory($src, $dst, $options = [])
+// 删除一个目录及内容
+FileHelper::removeDirectory($dir, $options = [])
+// 生成一个文件夹（同时设置权限）
+FileHelper::createDirectory($path, $mode = 0775, $recursive = true)
+```
+

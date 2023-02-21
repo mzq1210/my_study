@@ -115,3 +115,13 @@ foreach(Banner::find()->batch(10) as $key => $users){
     }
 }
 ```
+
+### 特殊排序
+
+```php
+(new \yii\db\Query)
+->from('orders')
+->orderBy(new \yii\db\Expression('CASE WHEN status != "ORDER_DONE" THEN 1 ELSE 2 END, status'))
+->all();
+```
+
