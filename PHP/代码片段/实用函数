@@ -45,3 +45,213 @@ echo "\$a = $a; \$b = $b; \$c = $c";
 // 结果：$a = Cat; $b = Dog; $c = Horse
 ```
 
+**array_filter** 
+强调过滤，当处理元素返回false，那么这个元素将会被过滤掉，且原数组索引不变。它里面的判断条件相当于sql的where
+
+```php
+//foreach获取女的数据
+foreach($data as $key => $item){
+    if($item['sex'] == '女'){
+        $res[$key] = $item;
+    }
+}
+//array_filter
+$res = array_filter($data, function($item){
+    return $item['sex'] == '女';
+})
+```
+
+**array_map** 
+
+类似于sql中select字段取别名， 事实上从关系数据库的角度来说，select被称之为“投影”， 并不是查询什么的。 换言之， select 语句只是将SQL的查询结果以一定的方式（选字段、计算值等等）提取出来了，它可以一次性处理多个数组。
+
+
+```php
+//foreach增加字段
+foreach($data as $key => $item){
+    $data[$key]['status'] = $item['sex'] == '女'? 1 : 0;
+}
+//array_map
+$res = array_map(function($item, $item2, ...){
+    return [
+        'id' => $item['id'],
+        'sex' => $item['sex'],
+        'status' => $item['sex'] == '女'? 1 : 0;
+    ];
+}, $data, $data2, ...)
+```
+
+**array_walk**
+
+foreach表达的是循环遍历， 但是在这个循环的过程中，要做什么样的处理是没有任何约束的， 删除被遍历的数组的某一项 ，或者修改一个十万八千里以外的变量的值，这就会带来“代码副作用”。而array_walk函数缺省情况下所有执行代码的作用域都在匿名函数内，如果要依赖或操作函数之外的数据， 必须通过匿名函数的use关键字导入。通俗一点的请， array_walk函数的权限不如foreach来的大， 因此，使用array_walk函数后，虽然无法让你随心所欲的编程，但是大限度的减少了你代码的副作用，两相权衡array_walk所带来的好处还是有值得使用它的理由的。 它所表达的语义就是“假如你需要用到我， 那么你除了遍历以外，其它的事情最好都别干，否则还是去用原生的foreach吧”
+
+```php
+//foreach增加字段
+foreach($data as $key => $item){
+    echo $item['id'];
+}
+//array_walk
+$res = array_walk($data, function($item) use ($temp){
+    echo $item['id'];
+})
+```
+
+>  array_filter() 重点在于过滤（而不是新增）某个元素，当你处理到一个元素时，返回过滤后的数组
+>  array_map() 重点在于[遍历](https://so.csdn.net/so/search?q=遍历&spm=1001.2101.3001.7020)一个数组或多个数组的元素，返回一个新的数组
+>  array_walk() 重点在于遍历数组进行某种操作
+>
+>  array_filter() 和 array_walk()对一个数组进行操作，数组参数在前，函数参数在后
+>  array_map() 可以处理多个数组，因此函数参数在前，数组参数在后，可以根据实际情况放入多个数组参数
+
+**array_reduce**
+
+上面三个数组函数的集大成者，这三个函数的底层完全可以由array_reduce实现。使用回调函数迭代将数组简化为单一的值。其中arr 为输入数组，callback(result ,value)接受两个参数,result为上一次迭代产生的值，value是当前迭代的值。
+
+```php
+//字符串拼接
+$arr = [
+    ['id'=>1,'name'=>"张三", 'age' => 20],
+    ['id'=>2,'name'=>"李四", 'age' => 21],
+    ['id'=>3,'name'=>"王五", 'age' => 22]
+];
+
+
+//foreach计算最大年龄
+$maxAge = 0;
+$result = [];
+foreach($data as $key => $item){
+    if($item['age'] > $maxAge){
+        $maxAge = $item['age'];
+        $result = $item;
+    }
+}
+
+//foreach计算平均年龄
+$total = 0;
+foreach($data as $key => $item){
+    $total += $item['age'];
+}
+$avg = $total/count($data);
+
+//array_reduce计算最大年龄
+$res = array_reduce($data, function($curr, $item){
+    return $curr['age'] < $item['age']? $item : $curr;
+}, ['age' => 0])
+    
+//array_reduce计算平均年龄
+$res = array_reduce($data, function($curr, $item){
+    return $curr + $item['age'];
+}, 0) / count($data);
+
+//再来一个array_reduce递归函数
+function array_reduce($data, $callback, $init){
+    if(count($data) == 0){
+        return $init;
+    }
+    $item = array_shift($data);
+    $init = $callback($init, $item);
+    return array_reduce($data, $callback, $init);
+}
+```
+
+> 第一个参数$data， 就要是处理的数据。
+> 第二个参数$callback，循环遍历时会被调用的函数，函数返回的结果在下一次循环调用时会被再次当成参数传入。
+> 第三个参数$initial，作为$callback函数被初次调用时的参数传递。
+> 善用array_reduce函数几乎可以替换掉绝大多数需要使用foreach、for、while语句的代码。
+
+**while和 do while**
+
+```php
+$i=1;
+while($i<=5)
+{
+    echo "The number is " . $i . "<br>";
+    $i++;
+}
+
+$i=1;
+do {
+    $i++;
+    echo "The number is " . $i . "<br>";
+}
+while ($i<=5);
+```
+
+**call_user_func**
+
+```php
+// call_user_func第一个参数可以接受用户自定义的回调函数作为参数。回调函数不止可以是简单函数，还可以是对象的方法，包括静态类方法。
+
+function action(string $data, callable $function)
+{
+    // 调用回调事件
+    call_user_func($function, $data);
+}
+
+/*************************1.普通函数*************************/
+function insert($i){
+    echo "插入数据{$i}\n";
+    return true;
+}
+
+$data = '数据';
+action($data, 'insert');
+
+/*************************2.匿名函数*************************/
+$prifex = '修饰符';
+action($data, function ($i) use ($prifex) {
+    echo "插入数据：修饰符-》{$prifex}，数据-》{$i}\n";
+    return true;
+});
+
+/*************************3.静态类*************************/
+class A
+{
+    static function insert($i)
+    {
+        echo "插入数据{$i}\n";
+        return true;
+    }
+}
+
+action($data, 'A::insert');
+action($data, [A::class, 'insert']);
+
+/*************************4.普通类*************************/
+class B
+{
+    function insert($i)
+    {
+        echo "插入数据{$i}\n";
+        return true;
+    }
+}
+
+$a = new B();
+action($data, [$a, 'insert']);
+
+/*************************5.自身$this*************************/
+class C
+{
+    function insert($i)
+    {
+        echo "插入数据22222222222{$i}\n";
+        return true;
+    }
+
+    function action(string $data)
+    {
+        // 调用回调事件
+        call_user_func([$this, 'insert'], $data);
+    }
+}
+$c = new C();
+$c->action($data);
+```
+
+
+
+
+
+
+
